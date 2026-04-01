@@ -1,0 +1,18 @@
+# Hasła i dane wrażliwe
+user-password.py
+*.lwp
+
+# Pywikibot cache
+apicache/
+throttle.ctrl
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# IDE
+.idea/
+
+# Dane wyjściowe
+output/
