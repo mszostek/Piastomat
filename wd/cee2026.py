@@ -64,10 +64,11 @@ countries = [
     # {"name": "Tadżykistan",                 "country": "wd:Q863",    "local_wikis": ["<https://tg.wikipedia.org/>"]},
     # {"name": "Uzbekistan",                 "country": "wd:Q265",    "local_wikis": ["<https://uz.wikipedia.org/>"]},
 
+    {"name": "Republika Dońska", "country": "wd:Q2453974", "local_wikis": ["<https://uk.wikipedia.org/>", "<https://ru.wikipedia.org/>"], },
     # {"name":"Polska", "country": "wd:Q36", "local_wikis":["<https://pl.wikipedia.org/>"], },
-    {"name":"Cypr", "country": "wd:Q229", "local_wikis":["<https://el.wikipedia.org/>"], },
-    {"name":"Erzianie", "country": "wd:Q47246", "local_wikis":["<https://myv.wikipedia.org/>"], },
-    {"name":"Esperanto", "country": "wd:Q143", "local_wikis":["<https://eo.wikipedia.org/>"], },
+    # {"name":"Cypr", "country": "wd:Q229", "local_wikis":["<https://el.wikipedia.org/>"], },
+    # {"name":"Erzianie", "country": "wd:Q47246", "local_wikis":["<https://myv.wikipedia.org/>"], },
+    # {"name":"Esperanto", "country": "wd:Q143", "local_wikis":["<https://eo.wikipedia.org/>"], },
 ]
 
 articles_query = '''
@@ -89,7 +90,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 SELECT DISTINCT ?country (SAMPLE(?are) AS ?area) ?population {
 VALUES ?country {wd:Q222 wd:Q399 wd:Q201111 wd:Q40 wd:Q227 wd:Q5710 wd:Q184 wd:Q225 wd:Q219 wd:Q5466 wd:Q7835 wd:Q36  wd:Q117458 wd:Q224 wd:Q213 wd:Q191 wd:Q41 wd:Q28 wd:Q794 wd:Q232 wd:Q1246 wd:Q36 wd:Q211 wd:Q37 wd:Q233 wd:Q236 wd:Q221 wd:Q9324216 wd:Q11196 wd:Q218 wd:Q36 wd:Q159 wd:Q403 wd:Q214 wd:Q215 wd:Q146521 wd:Q35565 wd:Q43 wd:Q212 wd:Q188076  wd:Q36 wd:Q230 wd:Q813 wd:Q1028 wd:Q6605 wd:Q863 wd:Q265 wd:Q36
-wd:Q229 wd:Q47246 wd:Q143
+wd:Q229 wd:Q47246 wd:Q143 wd:Q2453974
  }
 
   ?country wdt:P2046 ?are;
@@ -152,3 +153,4 @@ for country in countries:
         writer = csv.writer(tsvfile)
         writer.writerow(["Country", "Population", "Area (Km^2)", "Plwiki", "Enwiki", "LocalWiki"])
         writer.writerows([[r['name'], r['population'], r['area'], r['pl_wiki'], r['en_wiki'], r['local_wikis']] for r in results])
+# Republika Dońska,,,38,40,52
