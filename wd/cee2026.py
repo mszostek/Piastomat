@@ -149,7 +149,7 @@ for country in countries:
         sleep(.2)
 
     results.append(row)
-    with open('cee2026_2.tsv', 'w', newline='\n') as tsvfile:
+    with open('output/cee2026_2.tsv', 'w', newline='\n') as tsvfile:
         writer = csv.writer(tsvfile)
         writer.writerow(["Country", "Population", "Area (Km^2)", "Plwiki", "Enwiki", "LocalWiki"])
         writer.writerows([[r['name'], r['population'], r['area'], r['pl_wiki'], r['en_wiki'], r['local_wikis']] for r in results])
