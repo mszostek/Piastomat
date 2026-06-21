@@ -3,20 +3,6 @@
 """
 add_chemia_info.py
 
-Dodaje szablon {{Wikiprojekt:Chemia/info}} na początek stron dyskusji
-artykułów należących do [[Kategoria:Chemicy]].
-
-Zasady:
-  * jeśli szablon już występuje na stronie dyskusji -> pomijamy (bez dubli),
-  * jeśli strona dyskusji nie istnieje          -> tworzymy ją z samym szablonem,
-  * jeśli istnieje                              -> wstawiamy szablon na samą górę.
-
-Rozpoznawanie szablonu jest odporne na warianty zapisu (małe/wielkie litery
-w prefiksie przestrzeni nazw, podkreślenia vs spacje, dodatkowe parametry)
-dzięki porównaniu znormalizowanych tytułów (pywikibot) + parsowaniu
-mwparserfromhell. NIE wykrywa natomiast przekierowań-aliasów szablonu
-(gdyby ktoś transkludował np. {{WP Chemia}} -> Wikiprojekt:Chemia/info).
-
 Domyślnie tryb próbny (tylko lista stron do zmiany). Zapis: --save
 """
 

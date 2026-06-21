@@ -4,21 +4,8 @@
 Ujednolicenie sortowania kategorii krajowych w
 [[Kategoria:Kategorie według miejscowości]].
 
-Bezpośrednie podkategorie tej kategorii (kategorie krajowe) bywają
-posortowane pod wykrzyknikiem, z kluczem w miejscowniku, np.:
-
-    [[Kategoria:Kategorie według miejscowości|!Andorze]]
-
-Bot zmienia klucz na mianownik nazwy państwa, pobrany z kategorii
-eponimicznej obecnej NA TEJ SAMEJ STRONIE (sortowanej pod spacją), np.:
-
-    [[Kategoria:Andora| ]]      ->   klucz "Andora"
-
-Wynik:
-
-    [[Kategoria:Kategorie według miejscowości|Andora]]
-
-Domyślnie tryb próbny (tylko diff). Zapis: ./skrypt.py --save
+maintance/sort_kategorie_wg_miejscowości.py #dry run
+maintance/sort_kategorie_wg_miejscowości.py --save
 """
 
 import argparse

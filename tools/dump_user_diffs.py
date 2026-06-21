@@ -2,7 +2,7 @@
 """Zrzut treści wkładu wskazanych użytkowników (metadane + diff) do analizy.
 
 Użycie:
-    python dump_user_diffs.py Wandal1 "Inny Wandal" > zrzut.txt
+    python dump_user_diffs.py Wandal1 "Inny Wandal" > output/user_investigate/zrzut.txt
     python dump_user_diffs.py            # użyje nazwy domyślnej poniżej
 
 Treści nie ma w replikach Toolforge, więc lecimy przez Action API.
