@@ -17,14 +17,14 @@ dzięki porównaniu znormalizowanych tytułów (pywikibot) + parsowaniu
 mwparserfromhell. NIE wykrywa natomiast przekierowań-aliasów szablonu
 (gdyby ktoś transkludował np. {{WP Chemia}} -> Wikiprojekt:Chemia/info).
 
-Globalne argumenty pywikibota działają normalnie, m.in.:
-    python add_chemia_info.py -simulate   # przebieg na sucho, bez zapisu
-    python add_chemia_info.py -log
+Domyślnie tryb próbny (tylko lista stron do zmiany). Zapis: --save
 """
 
+import argparse
+
+import mwparserfromhell
 import pywikibot
 from pywikibot import pagegenerators
-import mwparserfromhell
 
 CATEGORY = 'Chemicy'
 TEMPLATE_TITLE = 'Wikiprojekt:Chemia/info'          # kanoniczny tytuł transkluzji
@@ -49,7 +49,11 @@ def has_template(text, target_title, site):
 
 
 def main():
-    pywikibot.handle_args()  # obsługa globalnych argumentów (-simulate, -log, ...)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--save', action='store_true',
+                        help='zapisuj zmiany (domyślnie tryb próbny)')
+    args = parser.parse_args()
+
     site = pywikibot.Site('pl', 'wikipedia')
     site.login()
 
@@ -63,7 +67,7 @@ def main():
         f'Artykułów w [[Kategoria:{CATEGORY}]]: {len(articles)} (recurse={RECURSE})'
     )
 
-    added = skipped = errors = 0
+    would_add = skipped = added = errors = 0
 
     for talk in pagegenerators.PreloadingGenerator(talks):
         try:
@@ -74,6 +78,12 @@ def main():
                 skipped += 1
                 continue
 
+            pywikibot.output(f'DO DODANIA: {talk.title()}')
+            would_add += 1
+
+            if not args.save:
+                continue
+
             talk.text = TEMPLATE_TEXT + '\n' + text
             talk.save(summary=SUMMARY, minor=False, botflag=True)
             added += 1
@@ -82,9 +92,15 @@ def main():
             pywikibot.error(f'Błąd przy {talk.title()}: {e}')
             errors += 1
 
-    pywikibot.output(
-        f'\nGotowe. Dodano: {added}, pominięto: {skipped}, błędów: {errors}.'
-    )
+    if args.save:
+        pywikibot.output(
+            f'\nGotowe. Dodano: {added}, pominięto: {skipped}, błędów: {errors}.'
+        )
+    else:
+        pywikibot.output(
+            f'\nTryb próbny. Do dodania: {would_add}, pominięto: {skipped}'
+            f' (uruchom z --save, aby zapisać).'
+        )
 
 
 if __name__ == '__main__':
