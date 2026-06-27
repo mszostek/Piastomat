@@ -14,28 +14,11 @@ import mwparserfromhell
 import pywikibot
 from pywikibot import pagegenerators
 
+from lib.categories import category_name, category_prefixes
+
 PARENT = 'Kategorie według miejscowości'        # bez prefiksu przestrzeni nazw
 SUMMARY = ('sortowanie kategorii krajowej pod nazwą państwa w mianowniku '
            '(zamiast wykrzyknika)')
-
-
-def category_prefixes(site):
-    """Wszystkie lokalne nazwy przestrzeni Kategoria: (np. kategoria, category)."""
-    ns = site.namespaces[14]
-    names = {ns.canonical_name, ns.custom_name, *ns.aliases}
-    return {n.lower() for n in names if n}
-
-
-def category_name(link, prefixes):
-    """Znormalizowana nazwa kategorii z linku (bez prefiksu) albo None."""
-    title = str(link.title)
-    if ':' not in title:
-        return None
-    prefix, _, rest = title.partition(':')
-    if prefix.strip().lower() not in prefixes:
-        return None
-    name = ' '.join(rest.replace('_', ' ').split())
-    return name[:1].upper() + name[1:] if name else name
 
 
 def sortkey(link):
