@@ -5,4 +5,5 @@ minthrottle = 0
 maxthrottle = 5
 maxlag = 30
 usernames['wikipedia']['pl'] = 'Piastomat'
+usernames['commons']['commons'] = 'Piastomat'
 password_file = "user-password.py"
